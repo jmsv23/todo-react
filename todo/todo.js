@@ -50,8 +50,18 @@ var TodoList = React.createClass({
           <ListItem text={task.text} done={task.done} idDelete={index} handlerDeleteTodo={self.props.handlerDeleteTodo} handlerUpdateTodo={self.props.handlerUpdateTodo} />
         )
       });
+    var n = this.props.data.filter(function(task, index){
+        if(typeof task.done == 'undefined') {
+          return task;
+        }
+      });
+
+    if(items.length == 0) {
+      items = <li className="list-group-item">Add a new task</li>;
+    }
     return (
       <div>
+        <span>{n.length} active tasks</span>
         <ul className="list-group">
           {items}
         </ul>
